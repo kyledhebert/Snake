@@ -17,11 +17,13 @@ public class DrawSnakeGamePanel extends JPanel {
 	private Snake snake;
 	private Kibble kibble;
 	private Score score;
+    private Wall wall;
 	
-	DrawSnakeGamePanel(Snake s, Kibble k, Score sc){
+	DrawSnakeGamePanel(Snake s, Kibble k, Score sc, Wall w){
 		this.snake = s;
 		this.kibble = k;
 		this.score = sc;
+        this.wall = w;
 	}
 	
 	public Dimension getPreferredSize() {
@@ -91,7 +93,8 @@ public class DrawSnakeGamePanel extends JPanel {
 	private void displayGame(Graphics g) {
 		displayGameGrid(g);
 		displaySnake(g);
-		displayKibble(g);	
+		displayKibble(g);
+        displayWalls(g);
 	}
 
 	private void displayGameGrid(Graphics g) {
@@ -113,6 +116,16 @@ public class DrawSnakeGamePanel extends JPanel {
 			g.drawLine(x, 0, x, maxY);
 		}
 	}
+
+    private void displayWalls(Graphics g) {
+        //Draw the walls in blue
+        g.setColor(Color.BLUE);
+
+        int x = wall.getWallX() * SnakeGame.squareSize;
+        int y = wall.getWallY() * SnakeGame.squareSize;
+
+        g.fillRect(x+1, y+1, SnakeGame.squareSize-2, SnakeGame.squareSize-2);
+    }
 
 	private void displayKibble(Graphics g) {
 
