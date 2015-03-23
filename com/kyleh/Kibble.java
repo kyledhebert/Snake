@@ -1,4 +1,4 @@
-package com.clara;
+package com.kyleh;
 
 import java.util.Random;
 
@@ -30,8 +30,7 @@ public class Kibble {
 			kibbleY = rng.nextInt(SnakeGame.ySquares);
 			kibbleInSnake = s.isSnakeSegment(kibbleX, kibbleY);
 		}
-		
-		
+
 	}
 
 	public int getKibbleX() {
