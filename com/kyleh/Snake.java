@@ -1,4 +1,4 @@
-package com.clara;
+package com.kyleh;
 
 import java.awt.Point;
 import java.util.LinkedList;
@@ -227,8 +227,8 @@ public class Snake {
 		return ateTail;
 	}
 
-	public boolean isSnakeSegment(int kibbleX, int kibbleY) {
-		if (snakeSquares[kibbleX][kibbleY] == 0) {
+	public boolean isSnakeSegment(int x, int y) {
+		if (snakeSquares[x][y] == 0) {
 			return false;
 		}
 		return true;
