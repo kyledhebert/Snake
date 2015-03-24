@@ -124,7 +124,11 @@ public class DrawSnakeGamePanel extends JPanel {
         int x = wall.getWallX() * SnakeGame.squareSize;
         int y = wall.getWallY() * SnakeGame.squareSize;
 
-        g.fillRect(x+1, y+1, SnakeGame.squareSize-2, SnakeGame.squareSize-2);
+        g.fillRect(x, y, SnakeGame.squareSize, SnakeGame.squareSize);
+        g.fillRect(x + SnakeGame.squareSize, y, SnakeGame.squareSize, SnakeGame.squareSize);
+        g.fillRect(x, +  y + SnakeGame.squareSize, SnakeGame.squareSize, SnakeGame.squareSize);
+
+
     }
 
 	private void displayKibble(Graphics g) {
