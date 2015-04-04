@@ -13,7 +13,7 @@ public class SnakeGame {
 	public static int xSquares ;
 	public static int ySquares ;
 
-	public final static int squareSize = 50;
+	public final static int squareSize = 25;
 
 	protected static Snake snake ;
 
@@ -22,6 +22,18 @@ public class SnakeGame {
 	protected static Score score;
 
     protected static Wall wall;
+
+	public static boolean warpWallsActive = true; //by default these are on in both game types
+
+	//The levels are used to tell the game which version of the walls to draw
+	//There are different wall layouts based on the level
+	//Level is determined by current score
+	static final int LEVEL_ONE = 1;
+	static final int LEVEL_TWO = 2;
+	static final int LEVEL_THREE = 3;
+	static final int LEVEL_FOUR = 4;
+
+	private static int gameLevel = LEVEL_ONE;
 
 	static final int BEFORE_GAME = 1;
 	static final int DURING_GAME = 2;
@@ -68,14 +80,15 @@ public class SnakeGame {
 	}
 
 	private static void initializeGame() {
-		//set up score, snake and first kibble
+		//set up score, snake and first kibble and first maze stage
+		//note: the first stage actually has no maze
 		xSquares = xPixelMaxDimension / squareSize;
 		ySquares = yPixelMaxDimension / squareSize;
 
 		snake = new Snake(xSquares, ySquares, squareSize);
 		kibble = new Kibble(snake);
 		score = new Score();
-        wall = new Wall(snake);
+        wall = new Wall(gameLevel, xSquares, ySquares, squareSize);
 
 		gameStage = BEFORE_GAME;
 	}

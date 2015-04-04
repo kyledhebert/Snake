@@ -1,7 +1,5 @@
 package com.kyleh;
 
-import java.util.Random;
-
 /**
  * Created by kylehebert on 3/23/15.
  * Objects of this class will represent walls in the
@@ -11,29 +9,45 @@ public class Wall {
     //these represent the positions on the grid where the wall can appear
     private int wallX;
     private int wallY;
+    private int gameLevel, maxX, maxY, squareSize;
+
 
     /**
-     * Wall needs to know where the snake is so the game doesn't
-     * place a piece of wall in the snake. Pick a random coordinate
-     * to place the wall, if the snake is there try again, else
-     * place the wall
-      * @param snake
+     * This represents all of the possible squares the wall can occupy
+     * A zero means there is no wall in that square, a 1 means a wall piece
+     * is present in that square
      */
-   public Wall(Snake snake) {
-        moveWall(snake);
+    private int wallSquares[][];
 
-   }
 
-   protected void moveWall(Snake snake) {
-       Random random = new Random();
-       boolean snakeIsHere = true;
-       while (snakeIsHere == true) {
-           wallX = random.nextInt(SnakeGame.xSquares);
-           wallY = random.nextInt(SnakeGame.ySquares);
-           snakeIsHere = snake.isSnakeSegment(wallX,wallY);
-       }
+    /**
+     * Wall needs to know what level the player is on, there are
+     * four different wall layouts, based on the level, which is
+     * determined by the current score
+     */
 
-   }
+    public Wall(int gameLevel, int maxX, int maxY, int squareSize) {
+        this.gameLevel = gameLevel;
+        this.maxX = maxX;
+        this.maxY = maxY;
+        this.squareSize = squareSize;
+
+        //create and fill wallSquares with zeros
+        //there are no walls in stage one
+        wallSquares = new int[maxX][maxY];
+        fillWallSquaresWithZeros();
+
+    }
+
+    private void fillWallSquaresWithZeros() {
+        for (int x = 0; x < this.maxX; x++){
+            for (int y = 0 ; y < this.maxY ; y++) {
+                wallSquares[x][y] = 0;
+            }
+        }
+    }
+
+    
 
     public int getWallX() {
         return wallX;

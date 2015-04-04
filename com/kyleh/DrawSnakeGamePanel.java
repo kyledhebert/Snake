@@ -126,7 +126,7 @@ public class DrawSnakeGamePanel extends JPanel {
 
         g.fillRect(x, y, SnakeGame.squareSize, SnakeGame.squareSize);
         g.fillRect(x + SnakeGame.squareSize, y, SnakeGame.squareSize, SnakeGame.squareSize);
-        g.fillRect(x, +  y + SnakeGame.squareSize, SnakeGame.squareSize, SnakeGame.squareSize);
+        g.fillRect(x, + y + SnakeGame.squareSize, SnakeGame.squareSize, SnakeGame.squareSize);
 
 
     }
