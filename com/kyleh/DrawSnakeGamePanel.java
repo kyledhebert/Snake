@@ -1,6 +1,7 @@
 package com.kyleh;
 
 import java.awt.*;
+import java.awt.image.PackedColorModel;
 import java.util.LinkedList;
 
 import javax.swing.JPanel;
@@ -120,16 +121,78 @@ public class DrawSnakeGamePanel extends JPanel {
     private void displayWalls(Graphics g) {
         //Draw the walls in blue
         g.setColor(Color.BLUE);
-
-        int x = wall.getWallX() * SnakeGame.squareSize;
-        int y = wall.getWallY() * SnakeGame.squareSize;
-
-        g.fillRect(x, y, SnakeGame.squareSize, SnakeGame.squareSize);
-        g.fillRect(x + SnakeGame.squareSize, y, SnakeGame.squareSize, SnakeGame.squareSize);
-        g.fillRect(x, + y + SnakeGame.squareSize, SnakeGame.squareSize, SnakeGame.squareSize);
+		//boundary walls for stage two
+		LinkedList<Point> northWall = wall.northWallSegmentsToDraw();
+		LinkedList<Point> southWall = wall.southWallSegmentsToDraw();
+		LinkedList<Point> eastWall = wall.eastWallSegmentsToDraw();
+		LinkedList<Point> westWall = wall.westWallSegmentsToDraw();
 
 
-    }
+		for (Point p : northWall) {
+			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		}
+
+		for (Point p : southWall) {
+			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		}
+
+		for (Point p : eastWall) {
+			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		}
+
+		for (Point p : westWall) {
+			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		}
+
+		//additional spokes for stage three
+		LinkedList<Point> northSpoke = wall.northSpokeSegmentsToDraw();
+		LinkedList<Point> southSpoke = wall.southSpokeSegmentsToDraw();
+		LinkedList<Point> eastSpoke = wall.eastSpokeSegmentsToDraw();
+		LinkedList<Point> westSpoke = wall.westSpokeSegmentsToDraw();
+
+		for (Point p : northSpoke) {
+			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		}
+
+		for (Point p : southSpoke) {
+			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		}
+
+		for (Point p : eastSpoke) {
+			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		}
+
+		for (Point p : westSpoke) {
+			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		}
+
+		//final maze additions for stage 4
+		LinkedList<Point> nwCross = wall.nwCrossSegmentsToDraw();
+		LinkedList<Point> cCross = wall.cCrossSegmentsToDraw();
+		LinkedList<Point> seCross = wall.seCrossSegmentsToDraw();
+
+		for (Point p : nwCross) {
+			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		}
+
+		for (Point p : cCross) {
+			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		}
+
+		for (Point p : seCross) {
+			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		}
+
+
+
+
+
+
+
+
+
+
+	}
 
 	private void displayKibble(Graphics g) {
 

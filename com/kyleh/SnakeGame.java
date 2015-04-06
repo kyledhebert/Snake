@@ -88,7 +88,7 @@ public class SnakeGame {
 		snake = new Snake(xSquares, ySquares, squareSize);
 		kibble = new Kibble(snake);
 		score = new Score();
-        wall = new Wall(gameLevel, xSquares, ySquares, squareSize);
+        wall = new Wall(xSquares, ySquares, squareSize);
 
 		gameStage = BEFORE_GAME;
 	}
