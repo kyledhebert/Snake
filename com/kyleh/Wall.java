@@ -230,6 +230,10 @@ public class Wall {
         return true;
     }
 
+    public void reset() {
+        fillWallSquaresWithZeros();
+    }
+
     public int[][] getWallSquares() {
         return wallSquares;
     }

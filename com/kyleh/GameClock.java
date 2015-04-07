@@ -23,6 +23,7 @@ public class GameClock extends TimerTask {
 		// This method will be called every clock tick
 						
 		int stage = SnakeGame.getGameStage();
+		int level = SnakeGame.getGameLevel();
 
 		switch (stage) {
 			case SnakeGame.BEFORE_GAME: {
@@ -36,6 +37,26 @@ public class GameClock extends TimerTask {
 					//tell kibble to update
 					kibble.moveKibble(snake, wall);
 					Score.increaseScore();
+				}
+				if (score.getScore() < 2) {
+					SnakeGame.setGameLevel(SnakeGame.LEVEL_ONE);
+				}else if (score.getScore() >= 2 && score.getScore() < 4) {
+					SnakeGame.setGameLevel(SnakeGame.LEVEL_TWO);
+					while (wall.isWallSegment(kibble.getKibbleX(),kibble.getKibbleY())) {
+						kibble.moveKibble(snake, wall);
+					}
+				}else if (score.getScore() >=4 && score.getScore() < 6) {
+					SnakeGame.setGameLevel(SnakeGame.LEVEL_THREE);
+					while (wall.isWallSegment(kibble.getKibbleX(),kibble.getKibbleY())) {
+						kibble.moveKibble(snake, wall);
+					}
+
+				}else {
+					SnakeGame.setGameLevel(SnakeGame.LEVEL_FOUR);
+					while (wall.isWallSegment(kibble.getKibbleX(),kibble.getKibbleY())) {
+						kibble.moveKibble(snake, wall);
+					}
+
 				}
 				break;
 			}

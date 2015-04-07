@@ -72,7 +72,7 @@ public class SnakeGame {
 		snakePanel.requestFocusInWindow(); //required to give this component the focus so it can generate KeyEvents
 
 		snakeFrame.add(snakePanel);
-		snakePanel.addKeyListener(new GameControls(snake));
+		snakePanel.addKeyListener(new GameControls(snake, wall));
 
 		setGameStage(BEFORE_GAME);
 
@@ -116,11 +116,20 @@ public class SnakeGame {
 		return gameStage;
 	}
 
+
+	public static int getGameLevel() {
+		return gameLevel;
+	}
+
 	public static boolean gameEnded() {
 		if (gameStage == GAME_OVER || gameStage == GAME_WON){
 			return true;
 		}
 		return false;
+	}
+
+	public static void setGameLevel(int gameLevel) {
+		SnakeGame.gameLevel = gameLevel;
 	}
 
 	public static void setGameStage(int gameStage) {

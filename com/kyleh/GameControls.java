@@ -6,9 +6,12 @@ import java.awt.event.KeyListener;
 public class GameControls implements KeyListener{
 	
 	Snake snake;
+
+	Wall wall;
 	
-	GameControls(Snake s){
+	GameControls(Snake s, Wall w){
 		this.snake = s;
+		this.wall = w;
 	}
 	
 	public void keyPressed(KeyEvent ev) {
@@ -33,6 +36,7 @@ public class GameControls implements KeyListener{
 		}
 		
 		if (SnakeGame.getGameStage() == SnakeGame.GAME_OVER){
+			wall.reset();
 			snake.reset();
 			Score.resetScore();
 			

@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 public class DrawSnakeGamePanel extends JPanel {
 	
 	private static int gameStage = SnakeGame.BEFORE_GAME;  //use this to figure out what to paint
+
+	private static int gameLevel = SnakeGame.LEVEL_ONE;
 	
 	private Snake snake;
 	private Kibble kibble;
@@ -68,7 +70,7 @@ public class DrawSnakeGamePanel extends JPanel {
 
 	private void displayGameWon(Graphics g) {
 		// TODO Replace this with something really special!
-		g.clearRect(100,100,350,350);
+		g.clearRect(100, 100, 350, 350);
 		g.drawString("YOU WON SNAKE!!!", 150, 150);
 		
 	}
@@ -119,14 +121,75 @@ public class DrawSnakeGamePanel extends JPanel {
 	}
 
     private void displayWalls(Graphics g) {
+
+		gameLevel = SnakeGame.getGameLevel();
+
         //Draw the walls in blue
         g.setColor(Color.BLUE);
+
+		switch (gameLevel) {
+
+			case 1:
+				break;
+			case 2:
+				displayLevelTwoMaze(g);
+				break;
+
+			case 3:
+				displayLevelTwoMaze(g);
+				displayLevelThreeMaze(g);
+				break;
+
+			case 4:
+				displayLevelTwoMaze(g);
+				displayLevelThreeMaze(g);
+				displayLevelFourMaze(g);
+				break;
+
+
+		}
+	}
+
+	private void displayKibble(Graphics g) {
+
+		//Draw the kibble in green
+		g.setColor(Color.GREEN);
+
+		int x = kibble.getKibbleX() * SnakeGame.squareSize;
+		int y = kibble.getKibbleY() * SnakeGame.squareSize;
+
+		g.fillRect(x + 1, y + 1, SnakeGame.squareSize - 2, SnakeGame.squareSize - 2);
+		
+	}
+
+	private void displaySnake(Graphics g) {
+
+		LinkedList<Point> coordinates = snake.segmentsToDraw();
+		
+		//Draw head in grey
+		g.setColor(Color.LIGHT_GRAY);
+		Point head = coordinates.pop();
+		g.fillRect((int)head.getX(), (int)head.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		
+		//Draw rest of snake in black
+		g.setColor(Color.BLACK);
+		for (Point p : coordinates) {
+			g.fillRect((int)p.getX(), (int)p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		}
+
+	}
+
+	private void displayInstructions(Graphics g) {
+        g.drawString("Press any key to begin!", 100, 200);
+        g.drawString("Press q to quit the game", 100, 300);
+	}
+
+	private void displayLevelTwoMaze(Graphics g) {
 		//boundary walls for stage two
 		LinkedList<Point> northWall = wall.northWallSegmentsToDraw();
 		LinkedList<Point> southWall = wall.southWallSegmentsToDraw();
 		LinkedList<Point> eastWall = wall.eastWallSegmentsToDraw();
 		LinkedList<Point> westWall = wall.westWallSegmentsToDraw();
-
 
 		for (Point p : northWall) {
 			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
@@ -144,6 +207,10 @@ public class DrawSnakeGamePanel extends JPanel {
 			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
 		}
 
+
+	}
+
+	private void displayLevelThreeMaze(Graphics g) {
 		//additional spokes for stage three
 		LinkedList<Point> northSpoke = wall.northSpokeSegmentsToDraw();
 		LinkedList<Point> southSpoke = wall.southSpokeSegmentsToDraw();
@@ -166,6 +233,9 @@ public class DrawSnakeGamePanel extends JPanel {
 			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
 		}
 
+	}
+
+	private void displayLevelFourMaze(Graphics g) {
 		//final maze additions for stage 4
 		LinkedList<Point> nwCross = wall.nwCrossSegmentsToDraw();
 		LinkedList<Point> cCross = wall.cCrossSegmentsToDraw();
@@ -182,52 +252,7 @@ public class DrawSnakeGamePanel extends JPanel {
 		for (Point p : seCross) {
 			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
 		}
-
-
-
-
-
-
-
-
-
-
 	}
 
-	private void displayKibble(Graphics g) {
-
-		//Draw the kibble in green
-		g.setColor(Color.GREEN);
-
-		int x = kibble.getKibbleX() * SnakeGame.squareSize;
-		int y = kibble.getKibbleY() * SnakeGame.squareSize;
-
-		g.fillRect(x+1, y+1, SnakeGame.squareSize-2, SnakeGame.squareSize-2);
-		
-	}
-
-	private void displaySnake(Graphics g) {
-
-		LinkedList<Point> coordinates = snake.segmentsToDraw();
-		
-		//Draw head in grey
-		g.setColor(Color.LIGHT_GRAY);
-		Point head = coordinates.pop();
-		g.fillRect((int)head.getX(), (int)head.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
-		
-		//Draw rest of snake in black
-		g.setColor(Color.BLACK);
-		for (Point p : coordinates) {
-			g.fillRect((int)p.getX(), (int)p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
-		}
-
-	}
-
-	private void displayInstructions(Graphics g) {
-        g.drawString("Press any key to begin!",100,200);		
-        g.drawString("Press q to quit the game",100,300);		
-    	}
-	
-    
 }
 
