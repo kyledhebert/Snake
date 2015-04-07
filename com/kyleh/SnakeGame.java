@@ -85,9 +85,8 @@ public class SnakeGame {
 		xSquares = xPixelMaxDimension / squareSize;
 		ySquares = yPixelMaxDimension / squareSize;
 
-		snake = new Snake(xSquares, ySquares, squareSize);
 		wall = new Wall(xSquares, ySquares, squareSize);
-
+		snake = new Snake(xSquares, ySquares, squareSize, wall);
 		kibble = new Kibble(snake,wall);
 		score = new Score();
 

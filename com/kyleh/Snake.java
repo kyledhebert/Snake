@@ -12,6 +12,7 @@ public class Snake {
 
 	private boolean hitWall = false;
 	private boolean ateTail = false;
+	private boolean hitMaze = false;
 
 	private int snakeSquares[][];  //represents all of the squares on the screen
 	//NOT pixels!
@@ -31,10 +32,13 @@ public class Snake {
 	private int maxX, maxY, squareSize;
 	private int snakeHeadX, snakeHeadY; //store coordinates of head - first segment
 
-	public Snake(int maxX, int maxY, int squareSize){
+	private Wall wall;
+
+	public Snake(int maxX, int maxY, int squareSize, Wall wall){
 		this.maxX = maxX;
 		this.maxY = maxY;
 		this.squareSize = squareSize;
+		this.wall = wall;
 		//Create and fill snakeSquares with 0s 
 		snakeSquares = new int[maxX][maxY];
 		fillSnakeSquaresWithZeros();
@@ -42,16 +46,18 @@ public class Snake {
 	}
 
 	protected void createStartSnake(){
-		//snake starts as 3 horizontal squares in the center of the screen, moving left
+		//snake starts as 3 horizontal squares just north of center the screen, moving left
+		//this is to account for the placement of the maze later in the game
 		int screenXCenter = (int) maxX/2;  //Cast just in case we have an odd number
 		int screenYCenter = (int) maxY/2;  //Cast just in case we have an odd number
 
-		snakeSquares[screenXCenter][screenYCenter] = 1;
-		snakeSquares[screenXCenter+1][screenYCenter] = 2;
-		snakeSquares[screenXCenter+2][screenYCenter] = 3;
+
+		snakeSquares[screenXCenter][screenYCenter+2] = 1;
+		snakeSquares[screenXCenter+1][screenYCenter+2] = 2;
+		snakeSquares[screenXCenter+2][screenYCenter+2] = 3;
 
 		snakeHeadX = screenXCenter;
-		snakeHeadY = screenYCenter;
+		snakeHeadY = screenYCenter+2;
 
 		snakeSize = 3;
 
@@ -144,6 +150,12 @@ public class Snake {
 			return;
 		}
 
+		//If Snake hit the maze, Game Over
+		if (hitMaze) {
+			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
+			return;
+		}
+
 		//Use snakeSquares array, and current heading, to move snake
 
 		//Put a 1 in new snake head square
@@ -211,6 +223,12 @@ public class Snake {
 			}
 		}
 
+		//Does this make the snake hit the maze?
+		if (didHitMaze(wall)) {
+			hitMaze = true;
+			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
+		}
+
 		//Does this make the snake eat its tail?
 
 		if (snakeSquares[snakeHeadX][snakeHeadY] != 0) {
@@ -271,6 +289,13 @@ public class Snake {
 		return false;
 	}
 
+	public boolean didHitMaze(Wall wall) {
+		if (wall.snakeHasHitTheMaze(snakeHeadX,snakeHeadY)) {
+			hitMaze = true;
+		}
+		return false;
+	}
+
 	public String toString(){
 		String textsnake = "";
 		//This looks the wrong way around. Actually need to do it this way or snake is drawn flipped 90 degrees. 
@@ -304,6 +329,7 @@ public class Snake {
 	public void reset() {
 		hitWall = false;
 		ateTail = false;
+		hitMaze = false;
 		fillSnakeSquaresWithZeros();
 		createStartSnake();
 

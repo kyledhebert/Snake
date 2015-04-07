@@ -25,7 +25,7 @@ public class Kibble {
 		Random rng = new Random();
 		boolean kibbleInSnake = true;
 		boolean kibbleInWall = true;
-		while (kibbleInSnake == true || kibbleInWall == true) {
+		while (kibbleInSnake || kibbleInWall) {
 			//Generate random kibble location
 			kibbleX = rng.nextInt(SnakeGame.xSquares);
 			kibbleY = rng.nextInt(SnakeGame.ySquares);

@@ -223,7 +223,16 @@ public class Wall {
         return true;
     }
 
+    public boolean snakeHasHitTheMaze(int snakeHeadX, int snakeHeadY) {
+        if (wallSquares[snakeHeadX][snakeHeadY] == 0) {
+            return false;
+        }
+        return true;
+    }
 
+    public int[][] getWallSquares() {
+        return wallSquares;
+    }
 
     public int getWallX() {
         return wallX;
