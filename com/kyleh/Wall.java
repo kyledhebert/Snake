@@ -37,12 +37,14 @@ public class Wall {
         this.squareSize = squareSize;
 
         //create and fill wallSquares with zeros
+        //a value of zero means the square does not contain a wall segment
+        //a value of 1 means the square contains a wall segment
         //there are no walls in stage one
         wallSquares = new int[maxX][maxY];
         fillWallSquaresWithZeros();
 
     }
-
+    //A zero means there is no wall segment in the square
     private void fillWallSquaresWithZeros() {
         for (int x = 0; x < this.maxX; x++){
             for (int y = 0 ; y < this.maxY ; y++) {
@@ -54,7 +56,8 @@ public class Wall {
     /**
      * These next few methods are used by DrawSnakeGamePanel to draw
      * each of the wall or maze segments as needed. Each method will return
-     * a list of coordinates for a particular section of wall.
+     * a list of coordinates for a particular section of wall. They will also
+     * add a value to wallSquares to indicate a wall segment is in that square.
      * @return a LinkedList of wall segments
      */
 
@@ -63,6 +66,7 @@ public class Wall {
         LinkedList<Point> northWallSegmentCoordinates = new LinkedList<Point>();
         for (int x = 0; x < maxX; x++) {
             int y = 0;
+            wallSquares[x][y] = 1;
             Point point = new Point(x*squareSize,y*squareSize);
             northWallSegmentCoordinates.add(point);
 
@@ -75,6 +79,7 @@ public class Wall {
         LinkedList<Point> southWallSegmentCoordinates = new LinkedList<Point>();
         for (int x = 0; x < maxX; x++) {
             int y = maxY-1;
+            wallSquares[x][y] = 1;
             Point point = new Point(x*squareSize, y*squareSize);
             southWallSegmentCoordinates.add(point);
         }
@@ -86,6 +91,7 @@ public class Wall {
         LinkedList<Point> eastWallSegmentCoordinates = new LinkedList<Point>();
         for (int y = 0; y < maxY; y++) {
             int x = 0;
+            wallSquares[x][y] = 1;
             Point point = new Point(x*squareSize, y*squareSize);
             eastWallSegmentCoordinates.add(point);
         }
@@ -97,6 +103,7 @@ public class Wall {
         LinkedList<Point> westWallSegmentCoordinates = new LinkedList<Point>();
         for (int y = 0; y < maxY; y++) {
             int x = maxX - 1;
+            wallSquares[x][y] = 1;
             Point point = new Point(x*squareSize, y*squareSize);
             westWallSegmentCoordinates.add(point);
         }
@@ -108,6 +115,7 @@ public class Wall {
         LinkedList<Point> northSpokeSegmentCoordinates = new LinkedList<Point>();
         for (int y = ((maxY/2) - 5) ; y >= 3 ; y--) {
             int x = (int) maxX/2; // this centers the spoke
+            wallSquares[x][y] = 1;
             Point point = new Point(x*squareSize, y*squareSize);
             northSpokeSegmentCoordinates.add(point);
         }
@@ -119,6 +127,7 @@ public class Wall {
         LinkedList<Point> southSpokeSegmentCoordinates = new LinkedList<Point>();
         for (int y = ((maxY/2) + 5); y <= maxY-3; y++) {
             int x = (int) maxX/2; //this centers the spoke
+            wallSquares[x][y] = 1;
             Point point = new Point(x*squareSize, y*squareSize);
             southSpokeSegmentCoordinates.add(point);
         }
@@ -130,6 +139,7 @@ public class Wall {
         LinkedList<Point> eastSpokeSegmentCoordinates = new LinkedList<Point>();
         for (int x = ((maxX/2) - 5); x >= 3; x-- ) {
             int y = (int) maxY/2;
+            wallSquares[x][y] = 1;
             Point point = new Point(x*squareSize, y*squareSize);
             eastSpokeSegmentCoordinates.add(point);
         }
@@ -141,6 +151,7 @@ public class Wall {
         LinkedList<Point> westSpokeSegmentCoordinates = new LinkedList<Point>();
         for (int x =((maxX/2) + 5); x <= maxX-3; x++) {
             int y = (int) maxY/2;
+            wallSquares[x][y] = 1;
             Point point = new Point(x*squareSize, y*squareSize);
             westSpokeSegmentCoordinates.add(point);
         }
@@ -152,12 +163,14 @@ public class Wall {
         LinkedList<Point> nwCrossSegmentCoordinates = new LinkedList<Point>();
         for (int x = 3; x <= 5; x++) {
             int y = 5;
+            wallSquares[x][y] = 1;
             Point point = new Point(x*squareSize, y*squareSize);
             nwCrossSegmentCoordinates.add(point);
         }
 
         for (int y = 4; y <=6; y++) {
             int x = 4;
+            wallSquares[x][y] = 1;
             Point point = new Point(x*squareSize, y*squareSize);
             nwCrossSegmentCoordinates.add(point);
         }
@@ -171,11 +184,13 @@ public class Wall {
         LinkedList<Point> cCrossSegmentCoordinates = new LinkedList<Point>();
 
         for (int x = screenXCenter - 1; x <= screenXCenter + 1; x++) {
+            wallSquares[x][screenYCenter] = 1;
             Point point = new Point(x*squareSize, screenYCenter*squareSize);
             cCrossSegmentCoordinates.add(point);
         }
 
         for (int y = screenYCenter - 1; y <= screenYCenter + 1; y++) {
+            wallSquares[screenXCenter][y] = 1;
             Point point = new Point(screenXCenter*squareSize,y*squareSize);
             cCrossSegmentCoordinates.add(point);
         }
@@ -187,16 +202,25 @@ public class Wall {
         LinkedList<Point> seCrossSegmentCoordinates = new LinkedList<Point>();
         for (int x = maxX-3; x >= maxX -5; x--) {
             int y = maxY -5;
+            wallSquares[x][y] = 1;
             Point point = new Point(x*squareSize, y*squareSize);
             seCrossSegmentCoordinates.add(point);
         }
 
         for (int y =maxY - 4; y >= maxY -6; y--) {
             int x = maxY -4;
+            wallSquares[x][y] = 1;
             Point point = new Point(x*squareSize, y*squareSize);
             seCrossSegmentCoordinates.add(point);
         }
         return seCrossSegmentCoordinates;
+    }
+
+    public boolean isWallSegment(int kibbleX, int kibbleY) {
+        if (wallSquares[kibbleX][kibbleY] == 0) {
+            return false;
+        }
+        return true;
     }
 
 

@@ -86,16 +86,17 @@ public class SnakeGame {
 		ySquares = yPixelMaxDimension / squareSize;
 
 		snake = new Snake(xSquares, ySquares, squareSize);
-		kibble = new Kibble(snake);
+		wall = new Wall(xSquares, ySquares, squareSize);
+
+		kibble = new Kibble(snake,wall);
 		score = new Score();
-        wall = new Wall(xSquares, ySquares, squareSize);
 
 		gameStage = BEFORE_GAME;
 	}
 
 	protected static void newGame() {
 		Timer timer = new Timer();
-		GameClock clockTick = new GameClock(snake, kibble, score, snakePanel);
+		GameClock clockTick = new GameClock(snake, kibble, score, wall, snakePanel);
 		timer.scheduleAtFixedRate(clockTick, 0 , clockInterval);
 	}
 
