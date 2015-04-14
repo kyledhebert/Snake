@@ -14,6 +14,7 @@ public class Snake {
 	private boolean ateTail = false;
 	private boolean hitMaze = false;
 
+
 	private int snakeSquares[][];  //represents all of the squares on the screen
 	//NOT pixels!
 	//A 0 means there is no part of the snake in this square

@@ -13,7 +13,7 @@ public class SnakeGame {
 	public static int xSquares ;
 	public static int ySquares ;
 
-	public final static int squareSize = 25;
+	public static int squareSize = 25;
 
 	protected static Snake snake ;
 
@@ -23,7 +23,8 @@ public class SnakeGame {
 
     protected static Wall wall;
 
-	public static boolean warpWallsActive = true; //by default these are on in both game types
+	private int gameType;
+
 
 	//The levels are used to tell the game which version of the walls to draw
 	//There are different wall layouts based on the level
@@ -56,6 +57,14 @@ public class SnakeGame {
 	//Framework for this class adapted from the Java Swing Tutorial, FrameDemo and Custom Painting Demo. You should find them useful too.
 	//http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/uiswing/examples/components/FrameDemoProject/src/components/FrameDemo.java
 	//http://docs.oracle.com/javase/tutorial/uiswing/painting/step2.html
+
+
+	public SnakeGame(int gameType, int squareSize) {
+		this.gameType = gameType;
+		this.squareSize = squareSize;
+
+	}
+
 
 	private static void createAndShowGUI() {
 		//Create and set up the window.
