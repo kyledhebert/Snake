@@ -69,10 +69,12 @@ public class SnakeGame {
 		this.gameType = gameType;
 		this.squareSize = squareSize;
 
-		initializeGame();
-
-		createAndShowGUI();
-
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				initializeGame();
+				createAndShowGUI();
+			}
+		});
 	}
 
 
@@ -128,7 +130,7 @@ public class SnakeGame {
 //			}
 //		});
 //	}
-//
+
 
 
 	public static int getGameStage() {
