@@ -21,9 +21,15 @@ public class SnakeGame {
 
 	protected static Score score;
 
-    protected static Wall wall;
+	protected static Wall wall;
 
-	private int gameType;
+
+	protected static int gameType;
+
+	public static boolean warpWallsActive; //by default these are on for both game types
+
+
+
 
 
 	//The levels are used to tell the game which version of the walls to draw
@@ -62,6 +68,10 @@ public class SnakeGame {
 	public SnakeGame(int gameType, int squareSize) {
 		this.gameType = gameType;
 		this.squareSize = squareSize;
+
+		initializeGame();
+
+		createAndShowGUI();
 
 	}
 
@@ -108,17 +118,17 @@ public class SnakeGame {
 		timer.scheduleAtFixedRate(clockTick, 0 , clockInterval);
 	}
 
-	public static void main(String[] args) {
-		//Schedule a job for the event-dispatching thread:
-		//creating and showing this application's GUI.
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				initializeGame();
-				createAndShowGUI();
-			}
-		});
-	}
-
+//	public static void main(String[] args) {
+//		//Schedule a job for the event-dispatching thread:
+//		//creating and showing this application's GUI.
+//		SwingUtilities.invokeLater(new Runnable() {
+//			public void run() {
+//				initializeGame();
+//				createAndShowGUI();
+//			}
+//		});
+//	}
+//
 
 
 	public static int getGameStage() {

@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by kylehebert on 4/13/15.
  * This class is responsible for showing the menu before the
- * game begins that allows the player to select game settings.
+ * game begins. The menu allows the player to select game settings.
  */
 public class SnakeMenu extends JFrame {
     private JPanel rootPanel;
@@ -41,6 +41,9 @@ public class SnakeMenu extends JFrame {
         super ("Snake 2");
         setContentPane(rootPanel);
         pack();
+        setSize(501,501);
+        //setUndecorated(true);
+        //setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
@@ -52,14 +55,13 @@ public class SnakeMenu extends JFrame {
 
             }
         });
-
-
         progressModeRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gameType = PROGRESS_MODE;
             }
         });
+
         smallRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,6 +81,7 @@ public class SnakeMenu extends JFrame {
                 squareSize = MEDIUM_SQUARES;
             }
         });
+
         startGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
