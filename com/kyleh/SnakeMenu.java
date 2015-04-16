@@ -17,24 +17,22 @@ public class SnakeMenu extends JFrame {
     private JLabel selectGameTypeLabel;
     private JRadioButton freeplayRadioButton;
     private JRadioButton progressModeRadioButton;
+    private JLabel rulesLabel;
     static final  int FREEPLAY = 1;
     static final int PROGRESS_MODE = 2;
     private  int gameType = FREEPLAY;
 
-
-    private JLabel selectPlayAreaSizeLabel;
-    private JRadioButton smallRadioButton;
-    private JRadioButton mediumRadioButton;
-    private JRadioButton largeRadioButton;
-    static final int SMALL_SQUARES = 12;
-    static final int MEDIUM_SQUARES = 25;
-    static final int LARGE_SQUARES = 50;
-    private int squareSize = MEDIUM_SQUARES;
-
+    private JLabel selectSpeedLabel;
+    private JRadioButton snailRadioButton;
+    private JRadioButton snakeRadioButton;
+    private JRadioButton rabbitRadioButton;
+    static final int SNAIL = 1;
+    static final int SNAKE = 2;
+    static final int RABBIT = 3;
+    private int snakeSpeed = SNAKE;
 
     private JButton startGameButton;
-
-
+    private JButton quitSnakeButton;
 
 
     public SnakeMenu() {
@@ -52,6 +50,8 @@ public class SnakeMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gameType = FREEPLAY;
+                rulesLabel.setText("Eat kibble and make your snake as large as possible");
+
 
             }
         });
@@ -59,33 +59,41 @@ public class SnakeMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gameType = PROGRESS_MODE;
+                rulesLabel.setText("Score points to advance to the next level. Adds obstacles and different food types.");
             }
         });
 
-        smallRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                squareSize = SMALL_SQUARES;
-
-            }
-        });
-        largeRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                squareSize = LARGE_SQUARES;
-            }
-        });
-        mediumRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                squareSize = MEDIUM_SQUARES;
-            }
-        });
 
         startGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SnakeGame snakeGame = new SnakeGame(gameType,squareSize);
+                SnakeGame snakeGame = new SnakeGame(gameType,snakeSpeed);
+            }
+        });
+
+        quitSnakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        snailRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                snakeSpeed = SNAIL;
+
+            }
+        });
+        snakeRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                snakeSpeed = SNAKE;
+            }
+        });
+        rabbitRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                snakeSpeed = RABBIT;
             }
         });
     }

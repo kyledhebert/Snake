@@ -13,9 +13,10 @@ public class Kibble {
 	private int kibbleY;  //This is the square number (not pixel)
 	
 	public Kibble(Snake s, Wall w){
-		//Kibble needs to know where the snake is, so it does not create a kibble in the snake
+		//Kibble needs to know where the snake and walls are, so it does not create
+		// a kibble in the snake or walls.
 		//Pick a random location for kibble, check if it is in the snake
-		//If in snake, try again
+		//If in snake or wall, try again
 		
 		moveKibble(s, w);
 	}
