@@ -13,7 +13,7 @@ public class SnakeGame {
 	public static int xSquares ;
 	public static int ySquares ;
 
-	public final static int squareSize = 25;
+	public static int squareSize = 25;
 
 	protected static Snake snake ;
 
@@ -21,9 +21,14 @@ public class SnakeGame {
 
 	protected static Score score;
 
-    protected static Wall wall;
+	protected static Wall wall;
 
-	public static boolean warpWallsActive = true; //by default these are on in both game types
+	//options selected by the player
+	protected static int gameType;
+	protected static int snakeSpeed;
+
+	public static boolean warpWallsActive =true; //by default these are on for both game types
+
 
 	//The levels are used to tell the game which version of the walls to draw
 	//There are different wall layouts based on the level
@@ -46,7 +51,7 @@ public class SnakeGame {
 	private static int gameStage = BEFORE_GAME;  //use this to figure out what should be happening. 
 	//Other classes like Snake and DrawSnakeGamePanel will need to query this, and change it's value
 
-	protected static long clockInterval = 500; //controls game speed
+	protected static long clockInterval = 250; //controls game speed
 	//Every time the clock ticks, the snake moves
 	//This is the time between clock ticks, in milliseconds
 	//1000 milliseconds = 1  second.
@@ -56,6 +61,20 @@ public class SnakeGame {
 	//Framework for this class adapted from the Java Swing Tutorial, FrameDemo and Custom Painting Demo. You should find them useful too.
 	//http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/uiswing/examples/components/FrameDemoProject/src/components/FrameDemo.java
 	//http://docs.oracle.com/javase/tutorial/uiswing/painting/step2.html
+
+
+	public SnakeGame(int gameType, int snakeSpeed) {
+		this.gameType = gameType;
+		this.snakeSpeed = snakeSpeed;
+
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				initializeGame();
+				createAndShowGUI();
+			}
+		});
+	}
+
 
 	private static void createAndShowGUI() {
 		//Create and set up the window.
@@ -96,21 +115,14 @@ public class SnakeGame {
 	protected static void newGame() {
 		Timer timer = new Timer();
 		GameClock clockTick = new GameClock(snake, kibble, score, wall, snakePanel);
+		if (snakeSpeed == 1)
+			clockInterval = 500;
+		else if (snakeSpeed == 2)
+			clockInterval = 250;
+		else if (snakeSpeed == 3)
+			clockInterval = 125;
 		timer.scheduleAtFixedRate(clockTick, 0 , clockInterval);
 	}
-
-	public static void main(String[] args) {
-		//Schedule a job for the event-dispatching thread:
-		//creating and showing this application's GUI.
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				initializeGame();
-				createAndShowGUI();
-			}
-		});
-	}
-
-
 
 	public static int getGameStage() {
 		return gameStage;
@@ -135,4 +147,12 @@ public class SnakeGame {
 	public static void setGameStage(int gameStage) {
 		SnakeGame.gameStage = gameStage;
 	}
+
+	public static boolean gameTypeIsClassic() {
+		if (gameType == 1) {
+			return true;
+		}
+		return false;
+	}
 }
+

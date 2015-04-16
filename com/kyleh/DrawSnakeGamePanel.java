@@ -21,7 +21,8 @@ public class DrawSnakeGamePanel extends JPanel {
 	private Kibble kibble;
 	private Score score;
     private Wall wall;
-	
+
+
 	DrawSnakeGamePanel(Snake s, Kibble k, Score sc, Wall w){
 		this.snake = s;
 		this.kibble = k;
@@ -34,7 +35,9 @@ public class DrawSnakeGamePanel extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);       
+
+		super.paintComponent(g);
+		setBackground(new Color(171,182,48));
 
         /* Where are we at in the game? 4 phases.. 
          * 1. Before game starts
@@ -94,7 +97,7 @@ public class DrawSnakeGamePanel extends JPanel {
 	}
 
 	private void displayGame(Graphics g) {
-		displayGameGrid(g);
+		//displayGameGrid(g);
 		displaySnake(g);
 		displayKibble(g);
         displayWalls(g);
@@ -124,8 +127,8 @@ public class DrawSnakeGamePanel extends JPanel {
 
 		gameLevel = SnakeGame.getGameLevel();
 
-        //Draw the walls in blue
-        g.setColor(Color.BLUE);
+
+        g.setColor(new Color(64,64,64));
 
 		switch (gameLevel) {
 
@@ -166,15 +169,15 @@ public class DrawSnakeGamePanel extends JPanel {
 
 		LinkedList<Point> coordinates = snake.segmentsToDraw();
 		
-		//Draw head in grey
+		//Draw head
 		g.setColor(Color.LIGHT_GRAY);
 		Point head = coordinates.pop();
 		g.fillRect((int)head.getX(), (int)head.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
 		
-		//Draw rest of snake in black
-		g.setColor(Color.BLACK);
+		//Draw rest of snake
+		g.setColor(new Color(32,139,50));
 		for (Point p : coordinates) {
-			g.fillRect((int)p.getX(), (int)p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+			g.fillRect((int)p.getX(), (int)p.getY(), SnakeGame.squareSize, SnakeGame.squareSize );
 		}
 
 	}

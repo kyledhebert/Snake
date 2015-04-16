@@ -38,25 +38,28 @@ public class GameClock extends TimerTask {
 					kibble.moveKibble(snake, wall);
 					Score.increaseScore();
 				}
-				if (score.getScore() < 2) {
-					SnakeGame.setGameLevel(SnakeGame.LEVEL_ONE);
-				}else if (score.getScore() >= 2 && score.getScore() < 4) {
-					SnakeGame.setGameLevel(SnakeGame.LEVEL_TWO);
-					while (wall.isWallSegment(kibble.getKibbleX(),kibble.getKibbleY())) {
-						kibble.moveKibble(snake, wall);
-					}
-				}else if (score.getScore() >=4 && score.getScore() < 6) {
-					SnakeGame.setGameLevel(SnakeGame.LEVEL_THREE);
-					while (wall.isWallSegment(kibble.getKibbleX(),kibble.getKibbleY())) {
-						kibble.moveKibble(snake, wall);
-					}
+				if (!SnakeGame.gameTypeIsClassic()) {
+					if (score.getScore() < 2) {
+						SnakeGame.setGameLevel(SnakeGame.LEVEL_ONE);
+					} else if (score.getScore() >= 2 && score.getScore() < 4) {
+						SnakeGame.setGameLevel(SnakeGame.LEVEL_TWO);
+						while (wall.isWallSegment(kibble.getKibbleX(), kibble.getKibbleY())) {
+							kibble.moveKibble(snake, wall);
 
-				}else {
-					SnakeGame.setGameLevel(SnakeGame.LEVEL_FOUR);
-					while (wall.isWallSegment(kibble.getKibbleX(),kibble.getKibbleY())) {
-						kibble.moveKibble(snake, wall);
-					}
+						}
+					} else if (score.getScore() >= 4 && score.getScore() < 6) {
+						SnakeGame.setGameLevel(SnakeGame.LEVEL_THREE);
+						while (wall.isWallSegment(kibble.getKibbleX(), kibble.getKibbleY())) {
+							kibble.moveKibble(snake, wall);
+						}
 
+					} else {
+						SnakeGame.setGameLevel(SnakeGame.LEVEL_FOUR);
+						while (wall.isWallSegment(kibble.getKibbleX(), kibble.getKibbleY())) {
+							kibble.moveKibble(snake, wall);
+						}
+
+					}
 				}
 				break;
 			}
