@@ -38,6 +38,8 @@ public class GameClock extends TimerTask {
 					kibble.moveKibble(snake, wall);
 					Score.increaseScore();
 				}
+				//if game mode is campaign, we need to add the mazes and reset
+				//the snake's position when a new level is reached
 				if (!SnakeGame.gameTypeIsClassic()) {
 					if (score.getScore() < 2) {
 						SnakeGame.setGameLevel(SnakeGame.LEVEL_ONE);
@@ -45,7 +47,6 @@ public class GameClock extends TimerTask {
 						SnakeGame.setGameLevel(SnakeGame.LEVEL_TWO);
 						while (wall.isWallSegment(kibble.getKibbleX(), kibble.getKibbleY())) {
 							kibble.moveKibble(snake, wall);
-
 						}
 					} else if (score.getScore() >= 4 && score.getScore() < 6) {
 						SnakeGame.setGameLevel(SnakeGame.LEVEL_THREE);
@@ -60,6 +61,8 @@ public class GameClock extends TimerTask {
 						}
 
 					}
+
+
 				}
 				break;
 			}

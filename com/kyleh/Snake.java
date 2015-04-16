@@ -48,17 +48,16 @@ public class Snake {
 
 	protected void createStartSnake(){
 		//snake starts as 3 horizontal squares just north of center the screen, moving left
-		//this is to account for the placement of the maze later in the game
 		int screenXCenter = (int) maxX/2;  //Cast just in case we have an odd number
 		int screenYCenter = (int) maxY/2;  //Cast just in case we have an odd number
 
 
-		snakeSquares[screenXCenter][screenYCenter+2] = 1;
-		snakeSquares[screenXCenter+1][screenYCenter+2] = 2;
-		snakeSquares[screenXCenter+2][screenYCenter+2] = 3;
+		snakeSquares[screenXCenter][screenYCenter] = 1;
+		snakeSquares[screenXCenter+1][screenYCenter] = 2;
+		snakeSquares[screenXCenter+2][screenYCenter] = 3;
 
 		snakeHeadX = screenXCenter;
-		snakeHeadY = screenYCenter+2;
+		snakeHeadY = screenYCenter;
 
 		snakeSize = 3;
 
@@ -326,6 +325,7 @@ public class Snake {
 
 		return true;
 	}
+
 
 	public void reset() {
 		hitWall = false;

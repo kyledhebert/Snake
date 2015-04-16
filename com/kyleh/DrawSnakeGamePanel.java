@@ -257,5 +257,6 @@ public class DrawSnakeGamePanel extends JPanel {
 		}
 	}
 
+
 }
 
