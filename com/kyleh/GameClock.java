@@ -51,11 +51,11 @@ public class GameClock extends TimerTask {
 				//within a wall once they appear, and reset the snake to starting
 				//size and position
 				if (!SnakeGame.gameTypeIsClassic()) {
-					if (score.getScore() < 2) {
+					if (score.getScore() < 8) {
 						SnakeGame.setGameLevel(SnakeGame.LEVEL_ONE);
-					} else if (score.getScore() >= 2 && score.getScore() < 4) {
+					} else if (score.getScore() >= 8 && score.getScore() < 16) {
 						SnakeGame.setGameLevel(SnakeGame.LEVEL_TWO);
-					} else if (score.getScore() >= 4 && score.getScore() < 6) {
+					} else if (score.getScore() >= 16 && score.getScore() < 32) {
 						SnakeGame.setGameLevel(SnakeGame.LEVEL_THREE);
 					} else {
 						SnakeGame.setGameLevel(SnakeGame.LEVEL_FOUR);
