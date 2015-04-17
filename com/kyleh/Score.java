@@ -66,7 +66,7 @@ public class Score {
 	public boolean wonCampaign() {
 		//in campaign mode the object is to score 50 points
 		if (!SnakeGame.gameTypeIsClassic())
-		if (score == 2) {
+		if (score == 50) {
 			SnakeGame.setGameStage(SnakeGame.GAME_WON);
 			return true;
 		}
