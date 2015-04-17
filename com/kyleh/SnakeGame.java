@@ -60,6 +60,7 @@ public class SnakeGame {
 	static DrawSnakeGamePanel snakePanel;
 	static SnakeMenu snakeMenu;
 	static GameOver gameOver;
+	static GameWon gameWon;
 
 
 	//Framework for this class adapted from the Java Swing Tutorial, FrameDemo and Custom Painting Demo. You should find them useful too.
@@ -118,17 +119,22 @@ public class SnakeGame {
 		//displays the options menu to the player
 		//at the beginning of game, and after a the game ends
 
-		//if this method is called after Game Over or Game Won
-		//we need to remove the game over screen from the frame
-		if (gameStage == GAME_OVER || gameStage == GAME_WON) {
+		//if this method is called after Game Over
+		//remove the game over panel
+		if (gameStage == GAME_OVER) {
 			snakeFrame.remove(gameOver.rootPanel);
 			gameStage = BEFORE_GAME;
 		}
 
+		//if called after Game Won
+		//remove the game won panel
+		if (gameStage == GAME_WON) {
+			snakeFrame.remove(gameWon.rootPanel);
+			gameStage= BEFORE_GAME;
+		}
 		snakeFrame.add(snakeMenu.rootPanel);
 		snakeFrame.repaint();
 	}
-
 
 
 	protected static void createAndShowGUI() {
@@ -146,6 +152,30 @@ public class SnakeGame {
 		snakeFrame.setVisible(true);
 	}
 
+	protected static void showGameWon() {
+		snakeFrame.remove(snakePanel);
+		gameWon = new GameWon();
+		snakeFrame.add(gameWon.rootPanel);
+		snakeFrame.validate();
+		snakeFrame.repaint();
+
+
+
+	}
+
+	protected static void showGameOver() {
+		snakeFrame.remove(snakePanel);
+		gameOver = new GameOver();
+		gameOver.displayScores();
+		snakeFrame.add(gameOver.rootPanel);
+		snakeFrame.validate();
+		snakeFrame.repaint();
+
+	}
+
+
+
+
 
 	protected static void newGame() {
 		Timer timer = new Timer();
@@ -159,15 +189,6 @@ public class SnakeGame {
 		timer.scheduleAtFixedRate(clockTick, 0, clockInterval);
 	}
 
-	protected static void showGameOver() {
-		snakeFrame.remove(snakePanel);
-		gameOver = new GameOver();
-		gameOver.displayScores();
-		snakeFrame.add(gameOver.rootPanel);
-		snakeFrame.validate();
-		snakeFrame.repaint();
-
-	}
 
 	public static int getGameStage() {
 		return gameStage;
@@ -184,6 +205,7 @@ public class SnakeGame {
 		}
 		return false;
 	}
+
 
 	public static void setGameLevel(int gameLevel) {
 		SnakeGame.gameLevel = gameLevel;

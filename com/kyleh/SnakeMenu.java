@@ -3,6 +3,8 @@ package com.kyleh;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  * Created by kylehebert on 4/13/15.
@@ -20,7 +22,7 @@ public class SnakeMenu {
 
     static final  int FREEPLAY = 1;
     static final int PROGRESS_MODE = 2;
-    private  int gameType = FREEPLAY;
+    private  int gameType = 0;
 
     private JLabel selectSpeedLabel;
     private JRadioButton snailRadioButton;
@@ -29,7 +31,7 @@ public class SnakeMenu {
     static final int SNAIL = 1;
     static final int SNAKE = 2;
     static final int RABBIT = 3;
-    private int snakeSpeed = SNAKE;
+    private int snakeSpeed = 0;
 
     private JButton startGameButton;
     private JButton quitSnakeButton;
@@ -39,48 +41,63 @@ public class SnakeMenu {
 
 
 
-        freeplayRadioButton.addActionListener(new ActionListener() {
+        freeplayRadioButton.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                SnakeGame.setGameType(FREEPLAY);
-
+            public void itemStateChanged(ItemEvent e) {
+                if (freeplayRadioButton.isSelected()){
+                    gameType = FREEPLAY; //used for selection validation
+                    SnakeGame.setGameType(FREEPLAY);
+                }
 
             }
         });
-        progressModeRadioButton.addActionListener(new ActionListener() {
+        progressModeRadioButton.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                SnakeGame.setGameType(PROGRESS_MODE);
+            public void itemStateChanged(ItemEvent e) {
+                if (progressModeRadioButton.isSelected()){
+                    gameType = PROGRESS_MODE;
+                    SnakeGame.setGameType(PROGRESS_MODE);
+                }
             }
         });
-
-        snailRadioButton.addActionListener(new ActionListener() {
+        snailRadioButton.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                SnakeGame.setSnakeSpeed(SNAIL);
-
+            public void itemStateChanged(ItemEvent e) {
+                if (snailRadioButton.isSelected()){
+                    snakeSpeed = SNAIL;
+                    SnakeGame.setSnakeSpeed(SNAIL);
+                }
             }
         });
-        snakeRadioButton.addActionListener(new ActionListener() {
+        snakeRadioButton.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                SnakeGame.setSnakeSpeed(SNAKE);
+            public void itemStateChanged(ItemEvent e) {
+                if (snakeRadioButton.isSelected()){
+                    snakeSpeed = SNAKE;
+                    SnakeGame.setSnakeSpeed(SNAKE);
+                }
             }
         });
-        rabbitRadioButton.addActionListener(new ActionListener() {
+        rabbitRadioButton.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                SnakeGame.setSnakeSpeed(RABBIT);
+            public void itemStateChanged(ItemEvent e) {
+                if (rabbitRadioButton.isSelected()){
+                    snakeSpeed = RABBIT;
+                    SnakeGame.setSnakeSpeed(RABBIT);
+                }
             }
         });
-
-
 
         startGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SnakeGame.createAndShowGUI();
-
+                if (gameType == 0) {
+                    JOptionPane.showMessageDialog(null, "Please select a game type.", "Game Type Error", JOptionPane.ERROR_MESSAGE);
+                } else if (snakeSpeed == 0) {
+                    JOptionPane.showMessageDialog(null, "Please select a snake speed.", "Snake Speed Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    SnakeGame.createAndShowGUI();
+                }
 
             }
         });

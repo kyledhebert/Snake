@@ -5,17 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by kylehebert on 4/16/15.
+ * Created by kylehebert on 4/17/15.
  */
-public class GameOver {
-    public JPanel rootPanel;
+public class GameWon {
     private JButton menuButton;
     private JButton quitButton;
-    private JLabel yourScoreLabel;
-    private JLabel highScoreLabel;
+    public JPanel rootPanel;
 
-
-    public GameOver() {
+    public GameWon() {
         menuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -28,13 +25,7 @@ public class GameOver {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
-
             }
         });
-    }
-
-    public void displayScores() {
-        yourScoreLabel.setText("Your Score: " + SnakeGame.score.getStringScore());
-        highScoreLabel.setText("High Score: " + SnakeGame.score.getStringHighScore());
     }
 }

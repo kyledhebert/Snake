@@ -67,7 +67,7 @@ public class Snake {
 		justAteMustGrowThisMuch = 0;
 	}
 
-	private void fillSnakeSquaresWithZeros() {
+	public void fillSnakeSquaresWithZeros() {
 		for (int x = 0; x < this.maxX; x++){
 			for (int y = 0 ; y < this.maxY ; y++) {
 				snakeSquares[x][y] = 0;
@@ -308,7 +308,7 @@ public class Snake {
 		return textsnake;
 	}
 
-	public boolean wonGame() {
+	public boolean wonClassicGame() {
 
 		//If all of the squares have snake segments in, the snake has eaten so much kibble 
 		//that it has filled the screen. Win!
