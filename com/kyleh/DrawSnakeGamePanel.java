@@ -55,6 +55,9 @@ public class DrawSnakeGamePanel extends JPanel {
         } 
         case SnakeGame.DURING_GAME : {
         	displayGame(g);
+			if (!SnakeGame.gameTypeIsClassic()) {
+				displayScore(g);
+			}
         	break;
         }
         case SnakeGame.GAME_OVER: {
@@ -76,6 +79,13 @@ public class DrawSnakeGamePanel extends JPanel {
 		g.clearRect(100, 100, 350, 350);
 		g.drawString("YOU WON SNAKE!!!", 150, 150);
 		
+	}
+
+	private void displayScore(Graphics g) {
+		int fontSize = 30;
+		g.setFont(new Font("TimesRoman", Font.PLAIN,fontSize));
+		String textScore = score.getStringScore();
+		g.drawString(textScore,440,50);
 	}
 	private void displayGameOver(Graphics g) {
 

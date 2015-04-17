@@ -35,6 +35,7 @@ public class SnakeMenu {
 
     private JButton startGameButton;
     private JButton quitSnakeButton;
+    private JTextField rulesTextField;
 
 
     public SnakeMenu() {
@@ -44,8 +45,9 @@ public class SnakeMenu {
         freeplayRadioButton.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if (freeplayRadioButton.isSelected()){
+                if (freeplayRadioButton.isSelected()) {
                     gameType = FREEPLAY; //used for selection validation
+                    rulesTextField.setText("Eat Kibble until the snake fills the screen");
                     SnakeGame.setGameType(FREEPLAY);
                 }
 
@@ -54,8 +56,9 @@ public class SnakeMenu {
         progressModeRadioButton.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if (progressModeRadioButton.isSelected()){
+                if (progressModeRadioButton.isSelected()) {
                     gameType = PROGRESS_MODE;
+                    rulesTextField.setText("Score 50 points while avoiding obstacles.");
                     SnakeGame.setGameType(PROGRESS_MODE);
                 }
             }
@@ -63,7 +66,7 @@ public class SnakeMenu {
         snailRadioButton.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if (snailRadioButton.isSelected()){
+                if (snailRadioButton.isSelected()) {
                     snakeSpeed = SNAIL;
                     SnakeGame.setSnakeSpeed(SNAIL);
                 }
@@ -72,7 +75,7 @@ public class SnakeMenu {
         snakeRadioButton.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if (snakeRadioButton.isSelected()){
+                if (snakeRadioButton.isSelected()) {
                     snakeSpeed = SNAKE;
                     SnakeGame.setSnakeSpeed(SNAKE);
                 }
@@ -81,7 +84,7 @@ public class SnakeMenu {
         rabbitRadioButton.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                if (rabbitRadioButton.isSelected()){
+                if (rabbitRadioButton.isSelected()) {
                     snakeSpeed = RABBIT;
                     SnakeGame.setSnakeSpeed(RABBIT);
                 }
