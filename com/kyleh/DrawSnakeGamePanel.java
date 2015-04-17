@@ -49,20 +49,20 @@ public class DrawSnakeGamePanel extends JPanel {
         gameStage = SnakeGame.getGameStage();
         
         switch (gameStage) {
-        case 1: {
+        case SnakeGame.BEFORE_GAME: {
         	displayInstructions(g);
         	break;
         } 
-        case 2 : {
+        case SnakeGame.DURING_GAME : {
         	displayGame(g);
         	break;
         }
-        case 3: {
-        	displayGameOver(g);
+        case SnakeGame.GAME_OVER: {
+        	SnakeGame.showGameOver();
         	break;
         }
-        case 4: {
-        	displayGameWon(g);
+        case SnakeGame.GAME_WON: {
+        	SnakeGame.showGameWon();
         	break;
         }
         }
@@ -256,6 +256,7 @@ public class DrawSnakeGamePanel extends JPanel {
 			g.fillRect((int) p.getX(), (int) p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
 		}
 	}
+
 
 }
 

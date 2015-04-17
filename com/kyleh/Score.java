@@ -62,6 +62,16 @@ public class Score {
 	public String getStringHighScore() {
 		return Integer.toString(highScore);
 	}
+
+	public boolean wonCampaign() {
+		//in campaign mode the object is to score 50 points
+		if (!SnakeGame.gameTypeIsClassic())
+		if (score == 2) {
+			SnakeGame.setGameStage(SnakeGame.GAME_WON);
+			return true;
+		}
+		return false;
+	}
 	
 }
 

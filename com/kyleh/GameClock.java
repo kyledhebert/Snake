@@ -9,6 +9,8 @@ public class GameClock extends TimerTask {
 	Score score;
 	Wall wall;
 	DrawSnakeGamePanel gamePanel;
+
+
 		
 	public GameClock(Snake snake, Kibble kibble, Score score, Wall wall, DrawSnakeGamePanel gamePanel){
 		this.snake = snake;
@@ -23,7 +25,6 @@ public class GameClock extends TimerTask {
 		// This method will be called every clock tick
 						
 		int stage = SnakeGame.getGameStage();
-		int level = SnakeGame.getGameLevel();
 
 		switch (stage) {
 			case SnakeGame.BEFORE_GAME: {
@@ -33,34 +34,37 @@ public class GameClock extends TimerTask {
 			case SnakeGame.DURING_GAME: {
 				//
 				snake.moveSnake();
+				if (snake.wonClassicGame() || score.wonCampaign()) {
+					SnakeGame.setGameStage(SnakeGame.GAME_WON);
+				}
+
 				if (snake.didEatKibble(kibble) == true) {		
 					//tell kibble to update
 					kibble.moveKibble(snake, wall);
 					Score.increaseScore();
 				}
+
+
+
+				//if game mode is campaign, we need to change the level
+				//based on score. Also need to make sure kibble isn't placed
+				//within a wall once they appear, and reset the snake to starting
+				//size and position
 				if (!SnakeGame.gameTypeIsClassic()) {
 					if (score.getScore() < 2) {
 						SnakeGame.setGameLevel(SnakeGame.LEVEL_ONE);
 					} else if (score.getScore() >= 2 && score.getScore() < 4) {
 						SnakeGame.setGameLevel(SnakeGame.LEVEL_TWO);
-						while (wall.isWallSegment(kibble.getKibbleX(), kibble.getKibbleY())) {
-							kibble.moveKibble(snake, wall);
-
-						}
 					} else if (score.getScore() >= 4 && score.getScore() < 6) {
 						SnakeGame.setGameLevel(SnakeGame.LEVEL_THREE);
-						while (wall.isWallSegment(kibble.getKibbleX(), kibble.getKibbleY())) {
-							kibble.moveKibble(snake, wall);
-						}
-
 					} else {
 						SnakeGame.setGameLevel(SnakeGame.LEVEL_FOUR);
-						while (wall.isWallSegment(kibble.getKibbleX(), kibble.getKibbleY())) {
-							kibble.moveKibble(snake, wall);
-						}
-
 					}
 				}
+				while (wall.isWallSegment(kibble.getKibbleX(), kibble.getKibbleY())) {
+					kibble.moveKibble(snake, wall);
+				}
+
 				break;
 			}
 			case SnakeGame.GAME_OVER: {
