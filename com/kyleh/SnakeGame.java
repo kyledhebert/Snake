@@ -58,25 +58,27 @@ public class SnakeGame {
 
 	static JFrame snakeFrame;
 	static DrawSnakeGamePanel snakePanel;
+	static SnakeMenu snakeMenu;
+	static GameOver gameOver;
+
+
 	//Framework for this class adapted from the Java Swing Tutorial, FrameDemo and Custom Painting Demo. You should find them useful too.
 	//http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/uiswing/examples/components/FrameDemoProject/src/components/FrameDemo.java
 	//http://docs.oracle.com/javase/tutorial/uiswing/painting/step2.html
 
-
-	public SnakeGame(int gameType, int snakeSpeed) {
-		this.gameType = gameType;
-		this.snakeSpeed = snakeSpeed;
-
+	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
+				snakeGameStart();
 				initializeGame();
-				createAndShowGUI();
+				showSnakeMenu();
+
 			}
 		});
+
 	}
 
-
-	private static void createAndShowGUI() {
+	private static void snakeGameStart() {
 		//Create and set up the window.
 		snakeFrame = new JFrame();
 		snakeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,7 +88,53 @@ public class SnakeGame {
 		snakeFrame.setVisible(true);
 		snakeFrame.setResizable(false);
 
+		xSquares = xPixelMaxDimension / squareSize;
+		ySquares = yPixelMaxDimension / squareSize;
+
+		snakeMenu = new SnakeMenu();
+	}
+
+
+	private static void initializeGame() {
+		//set up score, snake and first kibble and first maze stage
+		//note: the first stage actually has no maze
+		wall = new Wall(xSquares, ySquares, squareSize);
+		snake = new Snake(xSquares, ySquares, squareSize, wall);
+		kibble = new Kibble(snake,wall);
+		score = new Score();
+
+		gameStage = BEFORE_GAME;
+	}
+
+	protected static void resetGame() {
+		snake.reset();
+		wall.reset();
+		Score.resetScore();
+		snake.createStartSnake();
+
+	}
+
+	protected static void showSnakeMenu() {
+		//displays the options menu to the player
+		//at the beginning of game, and after a the game ends
+
+		//if this method is called after Game Over or Game Won
+		//we need to remove the game over screen from the frame
+		if (gameStage == GAME_OVER || gameStage == GAME_WON) {
+			snakeFrame.remove(gameOver.rootPanel);
+			gameStage = BEFORE_GAME;
+		}
+
+		snakeFrame.add(snakeMenu.rootPanel);
+		snakeFrame.repaint();
+	}
+
+
+
+	protected static void createAndShowGUI() {
+		snakeFrame.remove(snakeMenu.rootPanel);
 		snakePanel = new DrawSnakeGamePanel(snake, kibble, score, wall);
+		snakeFrame.add(snakePanel);
 		snakePanel.setFocusable(true);
 		snakePanel.requestFocusInWindow(); //required to give this component the focus so it can generate KeyEvents
 
@@ -98,19 +146,6 @@ public class SnakeGame {
 		snakeFrame.setVisible(true);
 	}
 
-	private static void initializeGame() {
-		//set up score, snake and first kibble and first maze stage
-		//note: the first stage actually has no maze
-		xSquares = xPixelMaxDimension / squareSize;
-		ySquares = yPixelMaxDimension / squareSize;
-
-		wall = new Wall(xSquares, ySquares, squareSize);
-		snake = new Snake(xSquares, ySquares, squareSize, wall);
-		kibble = new Kibble(snake,wall);
-		score = new Score();
-
-		gameStage = BEFORE_GAME;
-	}
 
 	protected static void newGame() {
 		Timer timer = new Timer();
@@ -121,7 +156,17 @@ public class SnakeGame {
 			clockInterval = 250;
 		else if (snakeSpeed == 3)
 			clockInterval = 125;
-		timer.scheduleAtFixedRate(clockTick, 0 , clockInterval);
+		timer.scheduleAtFixedRate(clockTick, 0, clockInterval);
+	}
+
+	protected static void showGameOver() {
+		snakeFrame.remove(snakePanel);
+		gameOver = new GameOver();
+		gameOver.displayScores();
+		snakeFrame.add(gameOver.rootPanel);
+		snakeFrame.validate();
+		snakeFrame.repaint();
+
 	}
 
 	public static int getGameStage() {
@@ -153,6 +198,15 @@ public class SnakeGame {
 			return true;
 		}
 		return false;
+	}
+
+	//setters for options decided on SnakeMenu
+	public static void setGameType(int gameType) {
+		SnakeGame.gameType = gameType;
+	}
+
+	public static void setSnakeSpeed(int snakeSpeed) {
+		SnakeGame.snakeSpeed = snakeSpeed;
 	}
 }
 

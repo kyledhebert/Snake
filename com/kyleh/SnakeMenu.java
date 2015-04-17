@@ -9,15 +9,15 @@ import java.awt.event.ActionListener;
  * This class is responsible for showing the menu before the
  * game begins. The menu allows the player to select game settings.
  */
-public class SnakeMenu extends JFrame {
-    private JPanel rootPanel;
+public class SnakeMenu {
+    public JPanel rootPanel;
     private JLabel snakelogo;
 
 
     private JLabel selectGameTypeLabel;
     private JRadioButton freeplayRadioButton;
     private JRadioButton progressModeRadioButton;
-    private JLabel rulesLabel;
+
     static final  int FREEPLAY = 1;
     static final int PROGRESS_MODE = 2;
     private  int gameType = FREEPLAY;
@@ -36,21 +36,13 @@ public class SnakeMenu extends JFrame {
 
 
     public SnakeMenu() {
-        super ("Snake 2");
-        setContentPane(rootPanel);
-        pack();
-        setSize(501,501);
-        //setUndecorated(true);
-        //setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+
 
 
         freeplayRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameType = FREEPLAY;
-                rulesLabel.setText("Eat kibble and make your snake as large as possible");
+                SnakeGame.setGameType(FREEPLAY);
 
 
             }
@@ -58,16 +50,38 @@ public class SnakeMenu extends JFrame {
         progressModeRadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameType = PROGRESS_MODE;
-                rulesLabel.setText("Score points to advance to the next level. Adds obstacles and different food types.");
+                SnakeGame.setGameType(PROGRESS_MODE);
             }
         });
+
+        snailRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SnakeGame.setSnakeSpeed(SNAIL);
+
+            }
+        });
+        snakeRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SnakeGame.setSnakeSpeed(SNAKE);
+            }
+        });
+        rabbitRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SnakeGame.setSnakeSpeed(RABBIT);
+            }
+        });
+
 
 
         startGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SnakeGame snakeGame = new SnakeGame(gameType,snakeSpeed);
+                SnakeGame.createAndShowGUI();
+
+
             }
         });
 
@@ -75,25 +89,6 @@ public class SnakeMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
-            }
-        });
-        snailRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                snakeSpeed = SNAIL;
-
-            }
-        });
-        snakeRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                snakeSpeed = SNAKE;
-            }
-        });
-        rabbitRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                snakeSpeed = RABBIT;
             }
         });
     }

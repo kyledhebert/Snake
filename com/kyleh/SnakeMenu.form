@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.kyleh.SnakeMenu">
-  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="7" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+  <grid id="27dc6" binding="rootPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="515" height="400"/>
     </constraints>
     <properties>
       <background color="-5523920"/>
@@ -14,6 +13,7 @@
       <component id="c35a" class="javax.swing.JLabel" binding="snakelogo">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="1.0"/>
         </constraints>
         <properties>
           <icon value="Snake II Logo.png"/>
@@ -23,6 +23,7 @@
       <component id="617c7" class="javax.swing.JLabel" binding="selectGameTypeLabel">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="1.0"/>
         </constraints>
         <properties>
           <text value="Select Game Type"/>
@@ -31,6 +32,7 @@
       <component id="e83f8" class="javax.swing.JRadioButton" binding="freeplayRadioButton" default-binding="true">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="1.0"/>
         </constraints>
         <properties>
           <selected value="true"/>
@@ -41,6 +43,7 @@
       <component id="621db" class="javax.swing.JRadioButton" binding="progressModeRadioButton" default-binding="true">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="1.0"/>
         </constraints>
         <properties>
           <text value="Campaign"/>
@@ -50,6 +53,7 @@
       <component id="4c5de" class="javax.swing.JLabel" binding="selectSpeedLabel">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="1.0"/>
         </constraints>
         <properties>
           <horizontalAlignment value="0"/>
@@ -60,6 +64,7 @@
       <component id="1646f" class="javax.swing.JButton" binding="startGameButton" default-binding="true">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="1.0"/>
         </constraints>
         <properties>
           <text value="Start Game"/>
@@ -68,30 +73,26 @@
       <component id="d9b8a" class="javax.swing.JButton" binding="quitSnakeButton" default-binding="true">
         <constraints>
           <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="1.0"/>
         </constraints>
         <properties>
           <text value="Quit Snake"/>
         </properties>
       </component>
-      <component id="b34ee" class="javax.swing.JLabel" binding="rulesLabel">
-        <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value=""/>
-        </properties>
-      </component>
       <component id="176ff" class="javax.swing.JRadioButton" binding="snakeRadioButton" default-binding="true">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="1.0"/>
         </constraints>
         <properties>
+          <selected value="true"/>
           <text value="Snake"/>
         </properties>
       </component>
       <component id="42d9f" class="javax.swing.JRadioButton" binding="snailRadioButton" default-binding="true">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="1.0"/>
         </constraints>
         <properties>
           <text value="Snail"/>
@@ -100,6 +101,7 @@
       <component id="1bd07" class="javax.swing.JRadioButton" binding="rabbitRadioButton" default-binding="true">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="1.0"/>
         </constraints>
         <properties>
           <text value="Rabbit"/>
