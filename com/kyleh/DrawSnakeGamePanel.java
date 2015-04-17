@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
-/** This class responsible for displaying the graphics, so the snake, grid, kibble, instruction text and high score
+/** This class is responsible for displaying the graphics, so the snake, grid, kibble, instruction text and high score
  * 
  * @author Clara
  *
@@ -71,30 +71,30 @@ public class DrawSnakeGamePanel extends JPanel {
         
     }
 
-	private void displayGameWon(Graphics g) {
-		// TODO Replace this with something really special!
-		g.clearRect(100, 100, 350, 350);
-		g.drawString("YOU WON SNAKE!!!", 150, 150);
-		
-	}
-	private void displayGameOver(Graphics g) {
-
-		g.clearRect(100,100,350,350);
-		g.drawString("GAME OVER", 150, 150);
-		
-		String textScore = score.getStringScore();
-		String textHighScore = score.getStringHighScore();
-		String newHighScore = score.newHighScore();
-		
-		g.drawString("SCORE = " + textScore, 150, 250);
-		
-		g.drawString("HIGH SCORE = " + textHighScore, 150, 300);
-		g.drawString(newHighScore, 150, 400);
-		
-		g.drawString("press a key to play again", 150, 350);
-		g.drawString("Press q to quit the game",150,400);		
-    			
-	}
+//	private void displayGameWon(Graphics g) {
+//		// TODO Replace this with something really special!
+//		g.clearRect(100, 100, 350, 350);
+//		g.drawString("YOU WON SNAKE!!!", 150, 150);
+//
+//	}
+//	private void displayGameOver(Graphics g) {
+//
+//		g.clearRect(100,100,350,350);
+//		g.drawString("GAME OVER", 150, 150);
+//
+//		String textScore = score.getStringScore();
+//		String textHighScore = score.getStringHighScore();
+//		String newHighScore = score.newHighScore();
+//
+//		g.drawString("SCORE = " + textScore, 150, 250);
+//
+//		g.drawString("HIGH SCORE = " + textHighScore, 150, 300);
+//		g.drawString(newHighScore, 150, 400);
+//
+//		g.drawString("press a key to play again", 150, 350);
+//		g.drawString("Press q to quit the game",150,400);
+//
+//	}
 
 	private void displayGame(Graphics g) {
 		//displayGameGrid(g);
@@ -183,7 +183,7 @@ public class DrawSnakeGamePanel extends JPanel {
 	}
 
 	private void displayInstructions(Graphics g) {
-        g.drawString("Press any key to begin!", 100, 200);
+        g.drawString("Use arrow keys to move. Press any key to begin!", 100, 200);
         g.drawString("Press q to quit the game", 100, 300);
 	}
 
